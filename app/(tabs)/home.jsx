@@ -5,12 +5,12 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { images } from '../../..constants/'
 import Searchinput from '../../../components/SearchInput'
 import Trending from '../../../components/Trending'
-import { getAllPosts } from '../../lib/appwrite'
+import { getAllPosts,getAllPosts } from '../../lib/appwrite'
 import VideoCard from '../../../components/VideoCard'
 
 const Home = () => {
     const { data: posts, refetch } = useAppwrite(getAllPosts)
-
+    const { data: latestPosts } = useAppwrite(getLatestPosts)
 
     const [refreshing, setRefreshing] = useState(false)
 
@@ -53,7 +53,7 @@ const Home = () => {
                 Latest Videos
             </Text>
 
-            <Trending  posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
+            <Trending  posts={latestPosts ?? []} />
          </View>
         </View>
       )}
