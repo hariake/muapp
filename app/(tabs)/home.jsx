@@ -1,14 +1,17 @@
 import { View, Text,FlatList,Image, RefreshControl, Alert } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-
+import EmptyState from '../../components/EmptyState'
 import { images } from '../../..constants/'
 import Searchinput from '../../../components/SearchInput'
 import Trending from '../../../components/Trending'
 import { getAllPosts,getAllPosts } from '../../lib/appwrite'
 import VideoCard from '../../../components/VideoCard'
+import { useGlobalContext } from "../../context/GlobalProvider"
 
 const Home = () => {
+    const { user, setUser,setIsLoggedIn } =
+      useGlobalContext();
     const { data: posts, refetch } = useAppwrite(getAllPosts)
     const { data: latestPosts } = useAppwrite(getLatestPosts)
 
@@ -32,10 +35,10 @@ const Home = () => {
             <View className="justify-between items-start flex-row mb-6">
                 <View>
                     <Text className="font-pmedium text-sm text-gray-100">
-                        Welcome Back
+                        Welcome Back,
                     </Text> 
                     <Text className="text-2xl font-psemibold text-white">
-
+                        {user?.username}
                     </Text>
                 </View>
                 <View className="mt-1.5">
