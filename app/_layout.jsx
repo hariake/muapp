@@ -1,8 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import { SplashScreen, Stack } from 'expo-router';
-import {React, useEffect} from 'react'
-import {useFonts} from 'expo-font'
-import { useEffect } from 'react';
+import {React, useEffect} from 'react';
+import {useFonts} from 'expo-font';
 
 import GlobalProvider from '../context/GlobalProvider';
 
@@ -32,7 +31,7 @@ const RootLayout = () => {
       if (!fontsLoaded && !error)return null;
       
   return (
-    <GlobaProvider>
+    <GlobalProvider>
 
 
     <Stack>
@@ -50,7 +49,7 @@ const RootLayout = () => {
         }}/>
     </Stack>
             
-    </GlobaProvider>
+    </GlobalProvider>
   )
 }
 

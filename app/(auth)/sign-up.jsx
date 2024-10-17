@@ -1,22 +1,24 @@
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, Image, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Link } from 'expo-router'
 import { images} from '../../constants'
-import FormField from '../../../components/FormField'
-import CustomButton from ' ../../components/CustomButton'
+import { FormField } from '../../components'
+import { CustomButton } from '../../components'
 import { createUser } from '../../lib/appwrite'
 import { useGlobalContext } from '../../context/GlobalProvider'
+import { router } from 'expo-router'
 
 
 const SignUp = () => {
+  const { setUser, setIsLogged } = useGlobalContext();
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [form, setForm] = useState({
+    username: "",
     email: "",
     password: "",
-    username: ""
-  })
-
- const [isSubmitting, setisSubmitting] = useState(false)
+  });
 
   const submit = async () => {
       if(!form.username || !form.email || !form.password)
@@ -24,22 +26,22 @@ const SignUp = () => {
         Alert.alert('Error', 'Please fill in all the fiels')
       }
 
-      setisSubmitting(true)
+      setIsSubmitting(true)
       try {
         const result = await createUser(form.email, form.password, form.username)
         
         setUser(result);
-        setIsLoggedIn(true);
+        setIsLogged(true);
 
         router.replace('/home')
       } catch (error) {
         Alert.alert('Error', error.message)        
       } finally {
-        setisSubmitting(false)
+        setIsSubmitting(false)
       }
   }
   return (
-    <SafeAreView className="bg-primary h-full">
+    <SafeAreaView className="bg-primary h-full">
       <ScrollView>
         <View className="w-full justify-center min-h-[85vh]
         px-4 my-6">
@@ -92,8 +94,8 @@ const SignUp = () => {
             </View>
         </View>
       </ScrollView>
-    </SafeAreView>
+    </SafeAreaView>
   )
 }
 
-export default SignUP
+export default SignUp

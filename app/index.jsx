@@ -4,8 +4,8 @@ import { Redirect, router} from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView, Image, Text, View } from 'react-native';
 import { images } from '../constants';
-import CustomButton from '../../components/CustomButton';
-import { useGlobalContext } from '../../context/GlobalProvider';
+import { CustomButton } from '../components'
+import { useGlobalContext } from '../context/GlobalProvider';
 
 
 export default function App() {
@@ -16,13 +16,13 @@ export default function App() {
     <SafeAreaView className="bg-primary h-full">
         <ScrollView contentContainerStyle={{ height: '100%'}}> 
             <View className="w-full justify-center items-center min-h-[85vh] px-4">
-                <image
+                <Image
                     source= {images.logo}
                     className='w-[130px] h-[84px]'
                     resizeMode="contain"
                 />
 
-                <image
+                <Image
                 source= {images.card}
                 className="max-w--[380px] w-full h-[300px]"
                 resizeMode="contain"
@@ -34,7 +34,7 @@ export default function App() {
                         <Text className="text-secondary-200">Aora</Text>
                     </Text>
 
-                    <image
+                    <Image
                         source={images.path}
                         className='w-[136px] h-[15px] absolute -bottom-2 -right-8'
                         resizeMode='contain'

@@ -1,47 +1,60 @@
-import { View, Text, ScrollView } from 'react-native'
+import { View, Text, ScrollView, Image, Alert } from 'react-native'
 import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Link } from 'expo-router'
 import { images} from '../../constants'
-import FormField from '../../../components/FormField'
-import CustomButton from ' ../../components/CustomButton'
+import { FormField } from '../../components'
+import { CustomButton } from '../../components'
 import {getCurrentUser, signIn} from '../../lib/appwrite'
 import { useGlobalContext } from '../../context/GlobalProvider'
+import { router } from 'expo-router'
 
 
-const SignIN = () => {
-  const { setUser, setIsLoggedIn } = useGlobalContext();
+const SignIn = () => {
+  const { setUser, setIsLogged } = useGlobalContext();
   const [form, setForm] = useState({
     email: "",
     password: ""
   })
 
- const [isSubmitting, setisSubmitting] = useState(false)
+ const [isSubmitting, setIsSubmitting] = useState(false)
 
  const submit = async () => {
-  if(!form.email || !form.password)
-  {
-    Alert.alert('Error', 'Please fill in all the fiels')
+  if (!form.email || !form.password) {
+    Alert.alert('Error', 'Please fill in all the fields');
+    return;  // Add return to avoid further execution
   }
 
-  setisSubmitting(true)
+  setIsSubmitting(true);
+  
   try {
-   await signIn(form.email, form.password,)
+    // Check if a session already exists
+    const currentUser = await getCurrentUser();
+    
+    if (currentUser) {
+      // If the user is already logged in, no need to create a new session
+      setUser(currentUser);
+      setIsLogged(true);
+      router.replace('/home');
+    } else {
+      // If no session exists, proceed with sign-in
+      await signIn(form.email, form.password);
 
-    const result = await getCurrentUser();
+      const result = await getCurrentUser();
+      setUser(result);
+      setIsLogged(true);
 
-    setUser(result);
-    setIsLoggedIn(true);
-
-    router.replace('/home')
+      router.replace('/home');
+    }
   } catch (error) {
-    Alert.alert('Error', error.message)        
+    Alert.alert('Error', error.message);
   } finally {
-    setisSubmitting(false)
+    setIsSubmitting(false);
   }
-}
+};
+
   return (
-    <SafeAreView className="bg-primary h-full">
+    <SafeAreaView className="bg-primary h-full">
       <ScrollView>
         <View className="w-full justify-center min-h-[85vh]
         px-4 my-6">
@@ -85,8 +98,8 @@ const SignIN = () => {
             </View>
         </View>
       </ScrollView>
-    </SafeAreView>
+    </SafeAreaView>
   )
 }
 
-export default SignIN
+export default SignIn

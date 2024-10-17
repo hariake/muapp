@@ -1,8 +1,12 @@
-import { View, Text } from 'react-native'
-import { Tabs, Redirect} from 'expo-router';
-import { icons} from '../../constants'
+import { StatusBar } from "expo-status-bar";
+import { Redirect, Tabs } from "expo-router";
+import { Image, Text, View } from "react-native";
 
-const TabIcon = ({icons, name, color, focused}) => {
+import { icons } from "../../constants";
+import { Loader } from "../../components";
+import { useGlobalContext } from "../../context/GlobalProvider";
+
+const TabIcon = ({icon, name, color, focused}) => {
     return (
         <View className="items-center justify-center gap-2">
             <Image
@@ -19,7 +23,7 @@ const TabIcon = ({icons, name, color, focused}) => {
     )
 }
 
-const TabsLayout = () => {
+const TabLayout = () => {
   return (
    <>
     <Tabs
@@ -40,7 +44,7 @@ const TabsLayout = () => {
         options={{
             title: "Home",
             headerShown: false,
-            tabBarIcon: ({ color, focused}) = (
+            tabBarIcon: ({ color, focused}) => (
                 <TabIcon
                  icon={icons.home}
                  color={color}
@@ -55,7 +59,7 @@ const TabsLayout = () => {
         options={{
             title: "Bookmark",
             headerShown: false,
-            tabBarIcon: ({ color, focused}) = (
+            tabBarIcon: ({ color, focused}) => (
                 <TabIcon
                  icon={icons.bookmark}
                  color={color}
@@ -70,7 +74,7 @@ const TabsLayout = () => {
         options={{
             title: "Create",
             headerShown: false,
-            tabBarIcon: ({ color, focused}) = (
+            tabBarIcon: ({ color, focused}) => (
                 <TabIcon
                  icon={icons.plus}
                  color={color}
@@ -85,7 +89,7 @@ const TabsLayout = () => {
         options={{
             title: "Profile",
             headerShown: false,
-            tabBarIcon: ({ color, focused}) = (
+            tabBarIcon: ({ color, focused}) => (
                 <TabIcon
                  icon={icons.profile}
                  color={color}
@@ -100,4 +104,4 @@ const TabsLayout = () => {
   )
 }
 
-export default AuthLayout
+export default TabLayout;

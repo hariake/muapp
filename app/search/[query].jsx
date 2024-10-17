@@ -2,9 +2,9 @@ import { View, Text,FlatList,} from 'react-native'
 import React, { useEffect, } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import EmptyState from '../../components/EmptyState'
-import Searchinput from '../../../components/SearchInput'
+import SearchInput from '../../components/SearchInput'
 import { getAllPosts } from '../../lib/appwrite'
-import VideoCard from '../../../components/VideoCard'
+import VideoCard from '../../components/VideoCard'
 import { useLocalSearchParams} from 'expo-router'
 
 const Search = () => {
@@ -19,7 +19,7 @@ const Search = () => {
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList 
-      data={[{ id:1 }, { id:2 }, { id:3 },]}
+      data={posts}
       keyExtractor={(item) => item.$id}
       renderItem={( { item } ) => {
         <VideoCard video={item}/>

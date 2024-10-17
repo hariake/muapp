@@ -2,18 +2,19 @@ import { View, Text,FlatList, TouchableOpacity, Image} from 'react-native'
 import React, { useEffect, } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import EmptyState from '../../components/EmptyState'
-import Searchinput from '../../../components/SearchInput'
+import SearchInput from '../../components/SearchInput';
 import { getAllPosts, getUserPosts, signOut } from '../../lib/appwrite'
-import VideoCard from '../../../components/VideoCard'
+import VideoCard from '../../components/VideoCard'
 import { useLocalSearchParams} from 'expo-router'
 import { icons} from '../../constants'
 import { useGlobalContext } from '../../context/GlobalProvider'
-import InfoBox from '../../../components/InfoBox'
+import InfoBox from '../../components/InfoBox'
 import { router } from 'expo-router'
+import useAppwrite from "../../lib/useAppwrite";
 
 
 const Profile = () => {
-    const { user, setUser,setIsLoggedIn } =
+    const { user, setUser,setIsLogged } =
     useGlobalContext();
     const { data: posts, refetch } = useAppwrite(
       () => getUserPosts(user.$id)); 
@@ -22,14 +23,14 @@ const Profile = () => {
   const logout = async () => {
       await signOut();
       setUser(null)
-      setIsLoggedIn(false)
+      setIsLogged(false)
 
       router.replace('/sign-in')
   }
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList 
-      data={[{ id:1 }, { id:2 }, { id:3 },]}
+      data={posts}
       keyExtractor={(item) => item.$id}
       renderItem={( { item } ) => {
         <VideoCard video={item}/>
