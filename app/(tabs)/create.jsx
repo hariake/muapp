@@ -43,9 +43,8 @@ const Create = () => {
     }
 
     setUploading(true);
-
     try {
-      await createVideo({
+        await createVideo({
         ...form,
         userId: user.$id, // Assuming the user ID is stored here
       });
