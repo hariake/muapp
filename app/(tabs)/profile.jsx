@@ -29,12 +29,18 @@ const Profile = () => {
   }
   return (
     <SafeAreaView className="bg-primary h-full">
-      <FlatList 
-      data={posts}
-      keyExtractor={(item) => item.$id}
-      renderItem={( { item } ) => {
-        <VideoCard video={item}/>
-      }}
+      <FlatList
+        data={posts}
+        keyExtractor={(item) => item.$id}
+        renderItem={({ item }) => (
+          <VideoCard
+            title={item.title}
+            thumbnail={item.thumbnail}
+            video={item.video}
+            creator={item.creator.username}
+            avatar={item.creator.avatar}
+          />
+        )}
       ListHeaderComponent={() => (
         <View className="w-full justify-center items-center mt-6 mb-12 px-4">
           <TouchableOpacity className="w-full items-end mb-10"

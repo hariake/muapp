@@ -10,8 +10,8 @@ import { useIsFocused } from "@react-navigation/native"; // Import useIsFocused
 
 const Home = () => {
   const { user, setUser, setIsLogged } = useGlobalContext();
-  const { data: posts, refetch } = useAppwrite(getAllPosts);
-  const { data: latestPosts } = useAppwrite(getLatestPosts);
+  const { data: posts, refetch: refetchAllPosts } = useAppwrite(getAllPosts);
+  const { data: latestPosts, refetch: refetchLatestPosts } = useAppwrite(getLatestPosts);
 
   const [refreshing, setRefreshing] = useState(false);
   const isFocused = useIsFocused(); // Check if the tab is focused
@@ -19,22 +19,26 @@ const Home = () => {
   const onRefresh = async () => {
     console.log("meelis");
     setRefreshing(true);
-    await refetch();
+    await refetchAllPosts();
+    await refetchLatestPosts();
     setRefreshing(false);
   };
 
-  useEffect(() => {
-    if (isFocused) {
-      refetch(); // Re-fetch posts when the screen is focused
-    }
-  }, [isFocused]); // Dependency on `isFocused`
 
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
         data={posts}
         keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => <VideoCard video={item} />}
+        renderItem={({ item }) => (
+          <VideoCard
+            title={item.title}
+            thumbnail={item.thumbnail}
+            video={item.video}
+            creator={item.creator.username}
+            avatar={item.creator.avatar}
+          />
+        )}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
             <View className="justify-between items-start flex-row mb-6">
