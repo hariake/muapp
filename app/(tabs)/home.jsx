@@ -1,11 +1,11 @@
 import { FlatList, Image, RefreshControl, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { images } from "../../constants";
-import { useGlobalContext } from "../../context/GlobalProvider";
-import useAppwrite from "../../lib/useAppwrite";
-import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
-import { EmptyState, SearchInput, Trending, VideoCard } from "../../components";
+import { images } from "constants";
+import { useGlobalContext } from "context/GlobalProvider";
+import useAppwrite from "lib/useAppwrite";
+import { getAllPosts, getLatestPosts } from "lib/appwrite";
+import { EmptyState, SearchInput, Trending, VideoCard } from "components";
 import { useIsFocused } from "@react-navigation/native"; // Import useIsFocused
 
 const Home = () => {

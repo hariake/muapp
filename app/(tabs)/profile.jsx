@@ -1,16 +1,14 @@
 import { View, Text,FlatList, TouchableOpacity, Image} from 'react-native'
 import React, { useEffect, } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import EmptyState from '../../components/EmptyState'
-import SearchInput from '../../components/SearchInput';
-import { getAllPosts, getUserPosts, signOut } from '../../lib/appwrite'
-import VideoCard from '../../components/VideoCard'
-import { useLocalSearchParams} from 'expo-router'
-import { icons} from '../../constants'
-import { useGlobalContext } from '../../context/GlobalProvider'
-import InfoBox from '../../components/InfoBox'
+import EmptyState from 'components/EmptyState'
+import { getUserPosts, signOut } from 'lib/appwrite'
+import VideoCard from 'components/VideoCard'
+import { icons} from 'constants'
+import { useGlobalContext } from 'context/GlobalProvider'
+import InfoBox from 'components/InfoBox'
 import { router } from 'expo-router'
-import useAppwrite from "../../lib/useAppwrite";
+import useAppwrite from "lib/useAppwrite";
 
 
 const Profile = () => {

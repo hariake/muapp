@@ -2,9 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { Redirect, router} from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ScrollView, Image, Text, View } from 'react-native';
-import { images } from '../constants';
-import { CustomButton } from '../components'
-import { useGlobalContext } from '../context/GlobalProvider';
+import { images } from 'constants';
+import { CustomButton } from 'components'
+import { useGlobalContext } from 'context/GlobalProvider';
 
 
 export default function App() {

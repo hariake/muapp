@@ -1,10 +1,9 @@
 import { View, Text,FlatList,} from 'react-native'
 import React, { useEffect, } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import EmptyState from '../../components/EmptyState'
-import SearchInput from '../../components/SearchInput'
-import { getAllPosts } from '../../lib/appwrite'
-import VideoCard from '../../components/VideoCard'
+import EmptyState from 'components/EmptyState'
+import SearchInput from 'components/SearchInput'
+import VideoCard from 'components/VideoCard'
 import { useLocalSearchParams} from 'expo-router'
 
 const Search = () => {

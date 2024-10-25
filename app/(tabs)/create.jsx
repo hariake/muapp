@@ -1,13 +1,13 @@
 import { View, Text, ScrollView, TouchableOpacity, Image, Alert } from 'react-native';
 import { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { FormField, CustomButton } from '../../components'; // Ensure components are imported correctly
+import { FormField, CustomButton } from 'components'; // Ensure components are imported correctly
 import { Video, ResizeMode } from 'expo-av';
-import { icons } from '../../constants'; // Ensure icons are properly imported
+import { icons } from 'constants'; // Ensure icons are properly imported
 import * as ImagePicker from 'expo-image-picker';
 import { router } from 'expo-router';
-import { createVideo } from '../../lib/appwrite'; // Ensure API functions are imported correctly
-import { useGlobalContext } from '../../context/GlobalProvider'; // Ensure context is imported
+import { createVideo } from 'lib/appwrite'; // Ensure API functions are imported correctly
+import { useGlobalContext } from 'context/GlobalProvider'; // Ensure context is imported
 
 const Create = () => {
   const { user } = useGlobalContext(); // Destructure `user` from context
